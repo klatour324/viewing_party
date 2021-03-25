@@ -9,8 +9,11 @@ class MovieService
 
   def movies_by_vote_average
     url = "https://api.themoviedb.org/3/discover/movie?api_key=cc1b7a1d937de5062ee5336bdb03e44d&language=en-US&sort_by=vote_average.desc&include_adult=false&include_video=false&page=1&vote_count.gte=100&with_original_language=en"
+    # url = "https://api.themoviedb.org/3/movie/top_rated?api_key=cc1b7a1d937de5062ee5336bdb03e44d&language=en-US&page=1"
     url_2 = "https://api.themoviedb.org/3/discover/movie?api_key=cc1b7a1d937de5062ee5336bdb03e44d&language=en-US&sort_by=vote_average.desc&include_adult=false&include_video=false&page=2&vote_count.gte=100&with_original_language=en"
+    # url_2 = "https://api.themoviedb.org/3/movie/top_rated?api_key=cc1b7a1d937de5062ee5336bdb03e44d&language=en-US&page=2"
     movie_data = get_data(url)
+    # require "pry"; binding.pry
     movie_data_2 = get_data(url_2)
     total_results = movie_data[:results].concat(movie_data_2[:results])
     result = {}
@@ -19,6 +22,7 @@ class MovieService
       result[movie[:title]] = movie[:vote_average]
     end
     result
+    # require "pry"; binding.pry
   end
 
   def movie_search(query)
