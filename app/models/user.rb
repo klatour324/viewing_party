@@ -13,7 +13,10 @@ class User < ApplicationRecord
 
   def invites
     id = self.id
-
     Party.joins(:party_friends).where(party_friends: {friendship_id: id})
+  end
+
+  def self.sanitize_email
+    email.downcase
   end
 end
