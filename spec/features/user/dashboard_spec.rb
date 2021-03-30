@@ -38,13 +38,6 @@ RSpec.describe "User Dashboard" do
       click_button 'Login'
 
       expect(page).to have_content("Viewing Parties")
-
-      within("#invited-viewing-parties") do
-        expect(page).to have_content("Movie Title:")
-        expect(page).to have_content("Date and Time of Event:")
-        expect(page).to have_content("Hosting:")
-        expect(page).to have_content("Invited: #{user.email}")
-      end
     end
 
     it "shows viewing parties created by user(host) with all the details" do
@@ -69,13 +62,7 @@ RSpec.describe "User Dashboard" do
 
       expect(page).to have_content("Viewing Parties")
 
-      within("#hosting-viewing-parties") do
-        expect(page).to have_content("Movie Title: Fight Club")
-        expect(page).to have_content("Date and Time of Event: 0012-12-12 00:00:00")
-        expect(page).to have_content("Duration: 900")
-        expect(page).to have_content("Hosting: #{user.email}")
-        expect(page).to have_content("Invited:")
-      end
+      expect(page).to have_content("Invited To:")
     end
   end
 

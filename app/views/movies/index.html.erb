@@ -1,27 +1,51 @@
-<h1>Hello, <%= current_user.email %>!</h1>
-<h2>Discover Movies!</h2>
+<div class='topnav'>
+  <%= link_to "Home", dashboard_path %>
+</div>
+
+<header class="text-center">
+  <h1>Hello, <%= current_user.email %>!</h1>
+  <h2>Discover Movies!</h2>
+</header>
 
 <section id="top_forty">
   <div class="container p-3 my-3 border">
-    <%= button_to "Find Top Rated Movies", method: :get, remote: true, form: "top_forty" %>
-    <% if params[:form] == "top_forty" %>
-      <% @top_movies.each do |top_movie_and_rating| %>
-        <%=link_to top_movie_and_rating[0], movie_path(top_movie_and_rating[1][0]) %>- Vote Average: <%= top_movie_and_rating[1][1] %><br>
-      <% end %>
-    <% end %>
-  </div>
+    <div class="container">
+      <div class="row">
+        <div class="col text-center">
+          <%= button_to "Find Top Rated Movies", method: :get, remote: true, form: "top_forty" %>
+            <% if params[:form] == "top_forty" %>
+              <% @top_movies.each do |top_movie_and_rating| %>
+                <%=link_to top_movie_and_rating[0], movie_path(top_movie_and_rating[1][0]) %>- Vote Average: <%= top_movie_and_rating[1][1] %><br>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
 </section>
 <br><br>
 
 <section id="movie_query">
-  <%= form_with url: discover_path, method: :get, local: true do |form| %>
-    <%= form.text_field :movie_query, value: "Search by movie title" %>
-    <%= form.submit "Find Movies" %>
-  <% end %>
+  <div class="container p-3 my-3 border">
+    <section class="text-center">
+      <%= form_with url: discover_path, method: :get, local: true do |form| %>
+        <div class="form-group">
+          <%= form.text_field :movie_query, {class:"form-control", placeholder:"Search Movies"} %>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col text-center">
+              <%= form.submit "Find Movies", class:"btn btn-outline-primary" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
 
-  <% if params[:movie_query] != nil %>
-    <% @query_results.each do |query| %>
-      <%= link_to query[0], movie_path(query[1][0])%>- Vote Average: <%= query[1][1] %><br>
-    <% end %>
-  <% end %>
+      <% if params[:movie_query] != nil %>
+        <% @query_results.each do |query| %>
+          <%= link_to query[0], movie_path(query[1][0])%>- Vote Average: <%= query[1][1] %><br>
+        <% end %>
+      <% end %>
+    </section>
+  </div>
 </section>

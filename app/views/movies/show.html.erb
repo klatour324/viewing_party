@@ -1,32 +1,50 @@
-<h1>Hello, <%= current_user.email %>!</h1>
+<div class='topnav'>
+  <%= link_to "Home", dashboard_path %>
+</div>
 
-<%= button_to "Create Viewing Party for Movie", new_party_path %>
+<header class="text-center">
+  <h1>Hello, <%= current_user.email %>!</h1>
+</header>
 
-<section id="movie_info_basics">
-  <h2><%= @movie_info[:title]  %></h2>
-  <p>Vote Average: <%= @movie_info[:vote_average] %> | Runtime: <%= @movie_info[:runtime] %> minutes |
-    Genre(s): <% @movie_info[:genres].each do |genre| %>
-      <%= genre %>
-    <% end %>
-    <br>
-  <h4>Summary:</h4>
-  <p><%= @movie_info[:summary] %></p>
-</section>
+<div class="container p-3 my-3 border">
+  <section class="text-center">
+    <%= button_to "Create Viewing Party for Movie", new_party_path, method: :get %>
+    <section id="movie_info_basics">
+      <img src="https://image.tmdb.org/t/p/w200<%= @movie_info[:poster_path] %>">
+      <h2><%= @movie_info[:title]  %></h2>
+      <p>Vote Average: <%= @movie_info[:vote_average] %> | Runtime: <%= @movie_info[:runtime] %> minutes |
+        Genre(s): <% @movie_info[:genres].each do |genre| %>
+          <%= genre %>
+        <% end %>
+        <br>
+      <h4>Summary:</h4>
+      <p><%= @movie_info[:summary] %></p>
+    </section>
+  </section>
+</div>
 
-<section id="movie_cast">
-  <h4>Cast:</h4>
-  <% @movie_info[:cast].each do |cast_member| %>
-    <%= cast_member[0] %> / <%= cast_member[1] %><br>
-  <% end %>
-</section>
-<section id="movie_reviews">
-  <h4><%= @movie_info[:reviews][:total_reviews]%> Reviews</h4>
-  <% @movie_info[:reviews].each_with_index do |review, index| %>
-    <% if index > 0 %>
-      <p>Author: <%= review[0] %></p>
-      <p><%= review[1] %></p><br>
-    <% end %>
-  <% end %>
-</section>
+<div class="container p-3 my-3 border">
+  <section id="movie_cast">
+    <section class="text-center">
+      <h4>Cast:</h4>
+      <% @movie_info[:cast].each do |cast_member| %>
+        <%= cast_member[0] %> / <%= cast_member[1] %><br>
+      <% end %>
+    </section>
+  </section>
+</div>
 
-<h3></h3>
+<div class="container p-3 my-3 border">
+  <section id="movie_reviews">
+    <section class="text-center">
+      <h4><%= @movie_info[:reviews][:total_reviews]%> Reviews</h4>
+      <% @movie_info[:reviews].each_with_index do |review, index| %>
+        <% if index > 0 %>
+          <p>Author: <%= review[0] %></p>
+          <p><%= review[1] %></p><br>
+        <% end %>
+      <% end %>
+    </section>
+  </section>
+  </div>
+</div>

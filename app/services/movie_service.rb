@@ -44,6 +44,7 @@ class MovieService
     movie_information[:summary] = info[:overview]
     movie_information[:cast] = movie_info_cast(api_movie_id)
     movie_information[:reviews] = movie_info_reviews(api_movie_id)
+    movie_information[:poster_path] = info[:poster_path]
     movie_information
   end
 
@@ -81,6 +82,7 @@ class MovieService
     url_storage[:movie_reviews] = "https://api.themoviedb.org/3/movie/#{movie_id}/reviews?api_key=#{api_key}&language=en-US&page=#{num + 1}"
     url_storage[:movie_cast] = "https://api.themoviedb.org/3/movie/#{movie_id}/credits?api_key=#{api_key}&language=en-US"
     url_storage[:movie_search] = "https://api.themoviedb.org/3/search/movie?api_key=#{api_key}&language=en-US&query=#{query}&page=#{num + 1}&include_adult=false"
+    url_storage[:poster_path] = "https://api.themoviedb.org/3/movie/#{movie_id}?api_key=#{api_key}&language=en-US"
     url_storage
   end
 

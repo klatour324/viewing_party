@@ -50,7 +50,7 @@ RSpec.describe 'MovieService' do
         movie_service = MovieService.new
         movie_info = movie_service.movie_information(550)
         expect(movie_info.class).to eq(Hash)
-        expect(movie_info.keys).to eq([:api_id, :title, :vote_average, :runtime, :genres, :summary, :cast, :reviews])
+        expect(movie_info.keys).to eq([:api_id, :title, :vote_average, :runtime, :genres, :summary, :cast, :reviews, :poster_path])
         expect(movie_info[:title]).to eq("Fight Club")
         expect(movie_info[:vote_average]).to eq(8.4)
         expect(movie_info[:runtime]).to eq(139)

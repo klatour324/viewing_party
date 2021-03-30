@@ -2,37 +2,56 @@
   <%= link_to "Discover Movies", discover_path %>
 </div>
 
-<h1>Hello, <%= current_user.email %>!</h1>
+<header class="text-center">
+  <h1>Hello, <%= current_user.email %>!</h1>
 
-<h2>Viewing Parties</h2>
+  <h2>Viewing Parties</h2>
+</header>
 
 <section id="hosting-viewing-parties">
-  <% @user_hosting_parties.each do |party| %>
-    <h4>Movie Title: <%= party.movie_title %></h4><br>
-    <p>Date and Time of Event: <%= party.date %></p><br>
-    <p>Duration: <%= party.duration %></p><br>
-    <p>Hosting: <%= current_user.email %></p><br>
-    <p>Invited:</p><br>
-  <% end %>
-</section>
-<section id="invited-viewing-parties">
-  <h3>Movie Title:</h3><br>
-  <h3>Date and Time of Event:</h3><br>
-  <h3>Hosting:</h3><br>
-  <h3>Invited: <%= current_user.email %></h3><br>
+  <div class="container p-3 my-3 border">
+    <section class="text-center">
+      <h2>Hosting:</h2>
+      <% @user_hosting_parties.each do |party| %>
+        <h4>Movie Title: <%= party.movie_title %></h4><br>
+        <p>Date and Time of Event: <%= party.date %></p><br>
+        <p>Duration: <%= party.duration %> minutes</p><br>
+        <p>Email: <%= party.user.email %></p>
+      <% end %>
+      <h2>Invited To:</h2>
+      <% @invited.each do |party| %>
+        <h4>Movie Title: <%= party.movie_title %></h4><br>
+        <p>Date and Time of Event: <%= party.date %></p><br>
+        <p>Duration: <%= party.duration %> minutes</p><br>
+        <p>Email: <%= party.user.email %></p>
+      <% end %>
+    </section>
+  </div>
 </section>
 
 <section id="friends-<%= current_user.id %>">
-<h2>Friends</h2>
-<% if current_user.friends.empty? %>
-  <p>"You currently have no friends"</p>
-<% else %>
-    <% current_user.friends.each do |friend| %>
-      <li><%= friend.email %></li>
+  <div class="container p-3 my-3 border">
+    <section class="text-center">
+      <h2>Friends</h2>
+      <% if current_user.friends.empty? %>
+        <p>"You currently have no friends"</p>
+      <% else %>
+          <% current_user.friends.each do |friend| %>
+            <li><%= friend.email %></li>
+          <% end %>
+      <% end %>
+    </section>
+    <%= form_with url: dashboard_friendships_path, local: true, method: :post do |f| %>
+    <div class="form-group">
+      <%= f.email_field :email, {class:"form-control", placeholder:"Enter Email"} %>
+    </div>
+    <div class="container">
+        <div class="row">
+          <div class="col text-center">
+            <%= f.submit 'Add Friend', class:"btn btn-outline-primary" %>
+          </div>
+        </div>
+      </div>
     <% end %>
-<% end %>
-<%= form_with url: dashboard_friendships_path, local: true, method: :post do |f| %>
-  <%= f.email_field :email %>
-  <%= f.submit 'Add Friend' %>
-<% end %>
+  </div>
 </section>
