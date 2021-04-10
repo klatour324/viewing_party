@@ -22,10 +22,9 @@ gem 'bootstrap', '~> 4.5.0'
 # gem 'mini_racer'
 gem 'jquery-rails'
 gem 'figaro', '~> 1.1', '>= 1.1.1'
-
+gem 'travis'
 group :development, :test do
   gem 'pry'
-  gem 'travis'
   gem 'rspec-pride'
   gem 'orderly'
   gem 'factory_bot_rails'
